@@ -1,6 +1,6 @@
 {
   "name": "mysql-express-sequelize-crud",
-  "version": "3.6.0",
+  "version": "4.0.0",
   "description": "React Admin backend with Express and Sequelize. 1 line per resource!",
   "main": "./lib/index.js",
   "types": "./lib/src/index.d.ts",
