@@ -7,10 +7,10 @@ describe('crud', () => {
       {
         [Op.or]: [
           {
-            field1: { [Op.iLike]: '%some mustach%' },
+            field1: { [Op.like]: '%some mustach%' },
           },
           {
-            field2: { [Op.iLike]: '%some mustach%' },
+            field2: { [Op.like]: '%some mustach%' },
           },
         ],
       },
@@ -18,14 +18,14 @@ describe('crud', () => {
         [Op.and]: [
           {
             [Op.or]: [
-              { field1: { [Op.iLike]: '%some%' } },
-              { field2: { [Op.iLike]: '%some%' } },
+              { field1: { [Op.like]: '%some%' } },
+              { field2: { [Op.like]: '%some%' } },
             ],
           },
           {
             [Op.or]: [
-              { field1: { [Op.iLike]: '%mustach%' } },
-              { field2: { [Op.iLike]: '%mustach%' } },
+              { field1: { [Op.like]: '%mustach%' } },
+              { field2: { [Op.like]: '%mustach%' } },
             ],
           },
         ],
@@ -34,14 +34,14 @@ describe('crud', () => {
         [Op.or]: [
           {
             [Op.or]: [
-              { field1: { [Op.iLike]: '%some%' } },
-              { field2: { [Op.iLike]: '%some%' } },
+              { field1: { [Op.like]: '%some%' } },
+              { field2: { [Op.like]: '%some%' } },
             ],
           },
           {
             [Op.or]: [
-              { field1: { [Op.iLike]: '%mustach%' } },
-              { field2: { [Op.iLike]: '%mustach%' } },
+              { field1: { [Op.like]: '%mustach%' } },
+              { field2: { [Op.like]: '%mustach%' } },
             ],
           },
         ],
@@ -86,7 +86,7 @@ describe('crud', () => {
       {
         [Op.or]: [
           {
-            field1: { [Op.iLike]: '%mustach%' },
+            field1: { [Op.like]: '%mustach%' },
           },
         ],
       },

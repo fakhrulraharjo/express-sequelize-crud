@@ -9,13 +9,20 @@ export type GetSearchList = <R>(
 export const sequelizeSearchFields = <R>(
   model: { findAll: (findOptions: FindOptions) => Promise<R[]> },
   searchableFields: string[],
-  comparator: symbol = Op.iLike
+  comparator: symbol = Op.like
 ) => async (q: string, limit: number, scope: WhereOptions = {}) => {
+  let renewedScope:{};
+  if(scope){
+  for (const [key, value] of Object.entries(scope)) {
+    if(typeof value == "boolean" && value == true ) {renewedScope = {...scope,[key]: {[Op.or] : {[Op.is] : value}}}}
+    if(typeof value == "boolean" && value == false ){renewedScope = {...scope,[key]: {[Op.or] : [{[Op.is] : value},{[Op.is] : null}]}}}
+  } 
+  }
   const resultChunks = await Promise.all(
     prepareQueries(searchableFields)(q, comparator).map(query =>
       model.findAll({
         limit,
-        where: { ...query, ...scope },
+        where: { ...query, ...renewedScope },
         raw: true,
       })
     )
@@ -28,7 +35,7 @@ export const sequelizeSearchFields = <R>(
 
 export const prepareQueries = (searchableFields: string[]) => (
   q: string,
-  comparator: symbol = Op.iLike
+  comparator: symbol = Op.like
 ): WhereOptions[] => {
   if (!searchableFields) {
     // TODO: we could propose a default behavior based on model rawAttributes

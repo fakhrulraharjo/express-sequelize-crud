@@ -66,7 +66,7 @@ app.use(
   crud('/admin/users', sequelizeCrud(User), {
     filters: {
       email: value => ({
-        [Op.iLike]: value,
+        [Op.like]: value,
       }),
     },
   })
@@ -107,9 +107,9 @@ app.use(
         limit,
         where: {
           [Op.or]: [
-            { address: { [Op.iLike]: `${q}%` } },
-            { zipCode: { [Op.iLike]: `${q}%` } },
-            { city: { [Op.iLike]: `${q}%` } },
+            { address: { [Op.like]: `${q}%` } },
+            { zipCode: { [Op.like]: `${q}%` } },
+            { city: { [Op.like]: `${q}%` } },
           ],
         },
       })

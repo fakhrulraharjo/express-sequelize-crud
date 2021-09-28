@@ -1,4 +1,4 @@
-import { Model } from 'sequelize'
+import { Model,Op } from 'sequelize'
 import { Actions } from '..'
 
 export const sequelizeCrud = <I extends string | number, R extends Model>(
@@ -16,6 +16,11 @@ export const sequelizeCrud = <I extends string | number, R extends Model>(
     },
     getOne: async id => _model.findByPk(id),
     getList: async ({ filter, limit, offset, order }) => {
+      for (const [key, value] of Object.entries(filter)) {
+        console.log(`${value}`);
+        if(typeof value == "boolean" && value == true ) filter[key] = {[Op.or] : {[Op.is] : value}}
+        if(typeof value == "boolean" && value == false ) filter[key] = {[Op.or] : [{[Op.is] : value},{[Op.is] : null}]}
+      } 
       return _model.findAndCountAll({
         limit,
         offset,
