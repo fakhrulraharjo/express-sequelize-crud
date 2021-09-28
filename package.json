@@ -20,9 +20,9 @@
     "express"
   ],
   "bugs": {
-    "url": "https://github.com/lalalilo/express-sequelize-crud/issues"
+    "url": "https://github.com/fakhrulraharjo/express-sequelize-crud/issues"
   },
-  "homepage": "https://github.com/lalalilo/express-sequelize-crud#readme",
+  "homepage": "https://github.com/fakhrulraharjo/express-sequelize-crud#readme",
   "license": "MIT",
   "scripts": {
     "build": "rimraf lib && babel src -d lib --extensions '.ts' && tsc",
